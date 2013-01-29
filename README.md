@@ -35,3 +35,28 @@ $this->crud->insert($table_name,$data,$field,$prefix);
 
 Third parameter $field means the field name of custom unique id in your table . The last one $prefix is prefix of
 your unique id , eg - aka_ is the prefix of aka_1 , like that .
+
+Update
+======
+
+  		$data = array(
+				'salary' => '5000',
+			);
+			$where[0]['where_field'] = 'active';
+			$where[0]['where_key'] = '1';
+  		$where[1]['where_field'] = 'employer_type';
+			$where[1]['where_key'] = '3';      
+      $table_name = 'test';
+			$this->crud->update($table_name,$data,$where);
+      
+Update method takes three parameters , 
+1. $table_name where you want to update.
+2. $data what you want to update.
+3. $where is an array what you want to rule when updating .
+
+It is simalar to be ..
+
+      $this->db->where($where[0]['where_field'],$where[0]['where_key'])
+               ->where($where[1]['where_field'],$where[1]['where_key'])
+               ->update($table_name,$data);
+
