@@ -60,3 +60,6 @@ It is simalar to be ..
                ->where($where[1]['where_field'],$where[1]['where_key'])
                ->update($table_name,$data);
 
+
+TO BE CONTINUE ..
+=================
