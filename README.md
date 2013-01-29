@@ -39,15 +39,15 @@ your unique id , eg - aka_ is the prefix of aka_1 , like that .
 Update
 ======
 
-	$data = array(
-		'salary' => '5000',
-	);
-	$where[0]['where_field'] = 'active';
-	$where[0]['where_key'] = '1';
-  	$where[1]['where_field'] = 'employer_type';
-	$where[1]['where_key'] = '3';      
-     	 $table_name = 'test';
-	$this->crud->update($table_name,$data,$where);
+		$data = array(
+			'salary' => '5000',
+		);
+		$where[0]['where_field'] = 'active';
+		$where[0]['where_key'] = '1';
+	  	$where[1]['where_field'] = 'employer_type';
+		$where[1]['where_key'] = '3';      
+	     	 $table_name = 'test';
+		$this->crud->update($table_name,$data,$where);
       
 Update method takes three parameters , 
 1. $table_name where you want to update.
