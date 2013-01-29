@@ -46,7 +46,7 @@ Update
 		$where[0]['where_key'] = '1';
 	  	$where[1]['where_field'] = 'employer_type';
 		$where[1]['where_key'] = '3';      
-	     	 $table_name = 'test';
+	     	$table_name = 'test';
 		$this->crud->update($table_name,$data,$where);
       
 Update method takes three parameters , 
