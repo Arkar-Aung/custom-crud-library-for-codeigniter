@@ -54,12 +54,35 @@ Update method takes three parameters ,
 2. $data what you want to update.
 3. $where is an array what you want to rule when updating .
 
-It is simalar to be ..
+It is similar to be ..
 
       $this->db->where($where[0]['where_field'],$where[0]['where_key'])
                ->where($where[1]['where_field'],$where[1]['where_key'])
                ->update($table_name,$data);
 
 
-TO BE CONTINUE ..
-=================
+Delete
+======
+Deleting closely looks like updating . Only one of the difference is not need to pass data array.
+so , syntax will like that .
+
+		$where[0]['where_field'] = 'id';
+		$where[0]['where_key'] = '3';     
+	     	$table_name = 'test';
+		$this->crud->update($table_name,$data,$where);
+
+It is similar to be ..
+
+      $this->db->where($where[0]['where_field'],$where[0]['where_key'])
+               ->delete($table_name,$data);
+               
+Get
+===
+Get makes you sligtly confusing to you . But don't worry . I'll explain you as much as I can .
+Basic syntax is ..
+
+		$this->crud->get($table_name,$where,$rule,$join);
+
+1. $table_name is just where you want to get data from .
+2. $where is just a where clause . You can pass unlimited where statements . But you need to pass it
+with two two dimensional array .
