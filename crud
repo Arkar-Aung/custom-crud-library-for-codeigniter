@@ -9,10 +9,10 @@
  * @author Arkar Aung
  * @copyright 2012 Arkar Aung
  * @license http://opensource.org/licenses/MIT MIT License
- * 
+ * @version 1.0
 */
 
-  class Crud 
+	class Crud 
 	{
 		
 		/** 
@@ -93,12 +93,13 @@
 		}
 		
 		/** 
-		 * Getting data as your rules define from your selected 
+		 * Getting data as your condition define from your selected 
 		 * table
 		 * 
 		 * Accepts three variables 
 		 * 
 		 * @param $table_name a name of table which you want to delete
+		 * @param $where an array to match with it when getting data 		 
 		 * @param $rule an array which contains rules to restrict when
 		 * getting the data
 		 * @param $join an array which contains field and key to join with
@@ -106,9 +107,9 @@
 		 * @return void
 		 */ 		
 		
-		function get($table_name,$rule = array(),$join = array())
+		function get($table_name,$where = array(),$rule = array(),$join = array())
 		{
-			return $this->ci->crud_model->get($table_name,$rule,$join);
+			return $this->ci->crud_model->get($table_name,$where,$rule,$join);
 		}
 		
 		/** 
@@ -127,6 +128,20 @@
 		function get_byKey($table_name,$where = array() ,$join = array())
 		{
 			return $this->ci->crud_model->get_byKey($table_name,$where,$join);
+		}
+
+		/** 
+		 * Setting empty value in all fields from your selected table .
+		 * 
+		 * Accepts one variable
+		 * 
+		 * @param $table_name a name of table which you want to clean up.
+		 * @return true , if unsuccessful , return false
+		 */ 		
+		
+		function truncate($table_name)
+		{
+			return $this->ci->crud_model->truncate($table_name);
 		}
 	}
 ?>
