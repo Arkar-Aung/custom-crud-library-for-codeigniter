@@ -78,7 +78,7 @@ It is similar to be ..
                
 Get
 ===
-Get makes you sligtly confusing to you . But don't worry . I'll explain you as much as I can .
+Get makes you sligtly confuse to you . But don't worry . I'll explain you as much as I can .
 Basic syntax is ..
 
 		$this->crud->get($table_name,$where,$rule,$join);
@@ -93,3 +93,16 @@ parameters and some need one parameter .
 But , It takes three fields that are table name where you want to join to , field_1 what you want to join
 with , field_2 what you want to join with from selected table .
 It looks like that ..
+
+			$join[0]['target_table'] = 'category';
+			$join[0]['target_field'] = 'id';
+			$join[0]['parent_field'] = 'category_id';
+			$join[1]['target_table'] = 'price';
+			$join[1]['target_field'] = 'id';
+			$join[1]['parent_field'] = 'price_id';			
+			$rule['order_by'] = 'desc';
+			$rule['order_field'] = 'id'
+			$where[0]['where_field'] = 'active';
+			$where[0]['where_key'] = '1';
+			$table_name = 'test';
+			$this->crud->get($table_name,$where,$rule,$join);
