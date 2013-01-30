@@ -34,7 +34,7 @@ parameters ,
 		$this->crud->insert($table_name,$data,$field,$prefix);
 
 Third parameter $field means the field name of custom unique id in your table . The last one $prefix is prefix of
-your unique id , eg - aka_ is the prefix of aka_1 , like that .
+your unique id , eg - aka_ is the prefix of aka_1 , like that . It'll return generated unique id .
 
 Update
 ======
@@ -60,6 +60,7 @@ It is similar to be ..
                ->where($where[1]['where_field'],$where[1]['where_key'])
                ->update($table_name,$data);
 
+It'll return true if success. If not , return false .
 
 Delete
 ======
@@ -75,6 +76,8 @@ It is similar to be ..
 
       $this->db->where($where[0]['where_field'],$where[0]['where_key'])
                ->delete($table_name,$data);
+
+It'll return true if success. If not , return false .
                
 Get
 ===
@@ -108,3 +111,26 @@ It looks like that ..
 			$where[0]['where_key'] = '1';
 			$table_name = 'test';
 			$this->crud->get($table_name,$where,$rule,$join);
+			
+It'll return array if your passing data is match with database . Use foreach loop to get each segment
+of return array . if not , return false .
+
+Get by Key
+==========
+Basic syntax is ..
+
+		$this->crud->get($table_name,$where,$join);
+
+It is same with Get . But We can kick out $rule array .So, it'll take 3 parameters . It intends
+to use getting an exact row . In the other way , When we get a certain row by id , we should use it .
+
+			$join[0]['target_table'] = 'category';
+			$join[0]['target_field'] = 'id';
+			$join[0]['parent_field'] = 'category_id';		
+			$where[0]['where_field'] = 'id';
+			$where[0]['where_key'] = '1';
+			$table_name = 'test';
+			$this->crud->get($table_name,$where,$join);
+			
+It'll return one dimensional array if your passing data is match with database . So , We don't need to
+do foreach loop again . Just ready to use . if not , return false .
