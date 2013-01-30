@@ -134,3 +134,12 @@ to use getting an exact row . In the other way , When we get a certain row by id
 			
 It'll return one dimensional array if your passing data is match with database . So , We don't need to
 do foreach loop again . Just ready to use . if not , return false .
+
+Truncate
+========
+Truncate is no need to explain in detail . We all know it that is using for empty the table . So , It'll take
+simply one parameter , table name where you want to empty to .
+Basic syntax is ..
+
+		$this->crud->truncate($table_name);
+
