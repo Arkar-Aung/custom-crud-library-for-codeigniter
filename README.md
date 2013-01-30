@@ -83,6 +83,7 @@ Basic syntax is ..
 
 		$this->crud->get($table_name,$where,$rule,$join);
 
+
 1. $table_name is just where you want to get data from .
 
 2. $where is just a where clause . You can pass unlimited where statements . But you need to pass it
