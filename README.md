@@ -85,4 +85,11 @@ Basic syntax is ..
 
 1. $table_name is just where you want to get data from .
 2. $where is just a where clause . You can pass unlimited where statements . But you need to pass it
-with two two dimensional array .
+with two dimensional array . This is because we need to pass both field where you want to and key what you
+want to .
+3.$rule means conditional clauses like order_by ,distinct ,like , group_by ,etc . Some clause need two 
+parameters and some need one parameter .
+4.$join means join clause . It can use unlimited . You also need to pass it with two dimensional array.
+But , It takes three fields that are table name where you want to join to , field_1 what you want to join
+with , field_2 what you want to join with from selected table .
+It looks like that ..
