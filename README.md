@@ -3,11 +3,11 @@ custom-crud-library-for-codeigniter
 
 This library is intend to save our developing time on doing repeatedly crud method.Using it with avoid to do crud 
 in model repeatedly and to clean your hand . There was a lot of crud library for codeigniter . Grocery Crud is the
-well-known library . Easy to use and ready made UI . I highly recommand to you Grocery is the best way to use for
-simple database structure . But sometime , when we face the complex database structure , from only my point of 
-view , It is slightly difficult to handle that . So , I decided to create that , custom crud library . It won't be
-perfect like grocery library because it was created as I needed at my work . But You can freely use ,modify and 
-contribute it . 
+well-known library . Easy to use and with ready made UI . I highly recommand to you unsing Grocery is the best way
+to use for simple database structure . But sometime , when we face the complex database structure , from only my 
+point of view , It is slightly difficult to handle that . So , I decided to create that , custom crud library . 
+It won't be perfect like grocery library because it was created as I needed at my work . But You can freely use ,
+modify and contribute it . 
 
 -------------------------------------------------------------------------------------------------------------
 
