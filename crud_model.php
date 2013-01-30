@@ -8,10 +8,11 @@
  * @author Arkar Aung
  * @copyright 2012 Arkar Aung
  * @license http://opensource.org/licenses/MIT MIT License
+ * @version 1.0
  * 
 */
 
-  class Crud_model extends CI_Model
+	class Crud_model extends CI_Model
 	{
 
 		/** 
@@ -93,6 +94,20 @@
 			}
 			return false;
 		}
+
+		/** 
+		 * Setting empty value in all fields from your selected table .
+		 * 
+		 * Accepts one variable
+		 * 
+		 * @param $table_name a name of table which you want to clean up.
+		 * @return true , if unsuccessful , return false
+		 */ 		
+		
+		function truncate($table_name)
+		{
+			return $this->db->truncate($table_name);
+		}
 		
 		/** 
 		 * Generating custom unique id .
@@ -132,19 +147,33 @@
 		 * 
 		 * Get all record from your selected table as your defined rules 
 		 * 
-		 * Accepts two variables 
+		 * Accepts four variables 
 		 * 
 		 * @param $table_name a name of table from which you want to get data .
-		 * @param $rule an array for order_by , limit , like  
+		 * @param $where an array to match with it when getting data 
+		 * @param $rule an array for order_by , limit , like  ,
+		 * @param $join an array to join with the your another selected table		 
 		 * @return data match with $rule
 		 */ 		
 		
-		function get($table_name,$rule = array())
+		function get($table_name,$where = array(),$rule = array(),$join = array())
 		{
+		
+			if(isset($join))
+			{		
+				foreach($join as $j)
+				{
+					if(isset($j['target_field']) && isset($j['target_table']) && isset($j['parent_field']))
+					{
+						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$table_name.'.'.$j['parent_field']);
+					}
+				}
+			}
+					
+			
 			if(isset($rule['order_by']) && isset($rule['order_field']))
 			{
-				$rule['order_by'] = 'desc';
-				$this->db->order_by($rule['order_field'],$rule['order_by']);
+				$this->db->order_by($table_name.'.'.$rule['order_field'],$rule['order_by']);
 			}
 
 			if(isset($rule['limit']))
@@ -154,7 +183,7 @@
 			
 			if(isset($rule['like_field']) && isset($rule['like_key']))	
 			{
-				$this->db->like($rule['like_field'],$rule['like_key']);	
+				$this->db->like($table_name.'.'.$rule['like_field'],$rule['like_key']);	
 			}	
 				
 			if(isset($rule['group_by']))	
@@ -162,15 +191,36 @@
 				$this->db->group_by($rule['group_by']); 
 			}	
 			
-			if(isset($rule['having_field'] && $rule['having_key'])
+			if(isset($rule['having_field']) && isset($rule['having_key']))
 			{
-				$this->db->having($rule['having_field'], $rule['having_key']); 
+				$this->db->having($table_name.'.'.$rule['having_field'], $rule['having_key']); 
 			}
+			
+			if(isset($rule['where_in_field']) && isset($rule['where_in_key']) && is_array($rule['where_in_key']))
+			{
+				$this->db->where_in($rule['where_in_field'],$rule['where_in_key']);
+			}	
 			
 			if(isset($rule['distinct']) && $rule['distinct'] == true)
 			{
 				$this->db->distinct();
 			}
+			
+			if(isset($where))
+			{
+				foreach($where as $w)
+				{
+					if(isset($w['where_field']) && isset($w['where_key']) && isset($w['is_or_where']))
+					{
+						$this->db->or_where($table_name.'.'.$w['where_field'],$w['where_key']);
+					}
+					if(isset($w['where_field']) && isset($w['where_key']) && !isset($w['is_or_where']))
+					{
+						
+						$this->db->where($table_name.'.'.$w['where_field'],$w['where_key']);
+					}					
+				}
+			}				
 				
 			$query = $this->db->get($table_name)->result_array();
 			if($query)
@@ -182,13 +232,13 @@
 		
 		/** 
 		 * Getting data match with $where from your selected table .
+		 *  It intends to use for getting a certain row 
 		 * 
-		 * Get all record from your selected table as your defined rules 
-		 * 
-		 * Accepts two variables 
+		 * Accepts three variables 
 		 * 
 		 * @param $table_name a name of table from which you want to get data .
-		 * @param $where an array which is a rule for getting data 
+		 * @param $where an array to match with it when getting data 
+		 * @param $join an array to join with the your another selected table
 		 * @return data match with $rule
 		 */ 		
 		
@@ -208,10 +258,14 @@
 			{
 				foreach($where as $w)
 				{
-					if(isset($w['where_field']) && isset($w['where_table']))
+					if(isset($w['where_field']) && isset($w['where_table']) && isset($w['is_or_where']))
 					{
-						$this->db->where($w['where_field'],$w['where_key']);
+						$this->db->or_where($table_name.'.'.$w['where_field'],$w['where_key']);
 					}
+					if(isset($w['where_field']) && isset($w['where_table']) && !isset($w['is_or_where']))
+					{
+						$this->db->where($table_name.'.'.$w['where_field'],$w['where_key']);
+					}					
 				}
 			}
 			$query = $this->db->get($table_name)->result_array();
@@ -221,6 +275,7 @@
 			}
 			return false;
 		}
+		
 		
 	}
 ?>
