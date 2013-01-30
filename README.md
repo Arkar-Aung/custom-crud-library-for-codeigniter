@@ -143,3 +143,6 @@ Basic syntax is ..
 
 		$this->crud->truncate($table_name);
 
+
+Demo will comming soon !
+------------------------
