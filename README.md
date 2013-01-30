@@ -4,11 +4,14 @@ custom-crud-library-for-codeigniter
 This library is intend to save our developing time on doing repeatedly crud method.Using it with avoid to do crud 
 in model repeatedly and clean your hand .
 
+-------------------------------------------------------------------------------------------------------------
+
 Installation
 ============
 Just download and extract zip file . And then , place crud.php into application/libraries and crud_model.php into
 application/models .
 
+-------------------------------------------------------------------------------------------------------------
 
 Basic Usage
 ===========
@@ -17,6 +20,8 @@ Before you use this library , need to load it. So , in autoload.php or in your c
 		$this->load->library('crud');
 
 After loading it ,
+
+-------------------------------------------------------------------------------------------------------------
 
 Insert
 ======
@@ -35,6 +40,8 @@ parameters ,
 
 Third parameter $field means the field name of custom unique id in your table . The last one $prefix is prefix of
 your unique id , eg - aka_ is the prefix of aka_1 , like that . It'll return generated unique id .
+
+-------------------------------------------------------------------------------------------------------------
 
 Update
 ======
@@ -62,6 +69,8 @@ It is similar to be ..
 
 It'll return true if success. If not , return false .
 
+-------------------------------------------------------------------------------------------------------------
+
 Delete
 ======
 Deleting closely looks like updating . Only one of the difference is not need to pass data array.
@@ -78,6 +87,8 @@ It is similar to be ..
                ->delete($table_name,$data);
 
 It'll return true if success. If not , return false .
+
+-------------------------------------------------------------------------------------------------------------
                
 Get
 ===
@@ -114,6 +125,8 @@ It looks like that ..
 			
 It'll return array if your passing data is match with database . Use foreach loop to get each segment
 of return array . if not , return false .
+
+-------------------------------------------------------------------------------------------------------------
 
 Get by Key
 ==========
