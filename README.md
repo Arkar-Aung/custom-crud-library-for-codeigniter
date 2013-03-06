@@ -137,7 +137,7 @@ Get by Key
 ==========
 Basic syntax is ..
 
-		$this->crud->get($table_name,$where,$join);
+		$this->crud->get_byKey($table_name,$where,$join);
 
 It is same with Get . But We can kick out $rule array .So, it'll take 3 parameters . It intends
 to use getting an exact row . In the other way , When we get a certain row by id , we should use it .
@@ -148,7 +148,7 @@ to use getting an exact row . In the other way , When we get a certain row by id
 			$where[0]['where_field'] = 'id';
 			$where[0]['where_key'] = '1';
 			$table_name = 'test';
-			$this->crud->get($table_name,$where,$join);
+			$this->crud->get_byKey($table_name,$where,$join);
 			
 It'll return one dimensional array if your passing data is match with database . So , We don't need to
 do foreach loop again . Just ready to use . if not , return false .
