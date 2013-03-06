@@ -133,7 +133,7 @@
 				$temp = substr($uniqid,strlen($prefix),strlen($prefix)+1);
 				$temp = $temp + 1;
 				$uniqid	= $prefix.$temp;		
-			
+				
 			}
 			else
 			{
@@ -158,7 +158,7 @@
 		
 		function get($table_name,$where = array(),$rule = array(),$join = array())
 		{
-		
+
 			if(isset($join))
 			{		
 				foreach($join as $j)
@@ -168,8 +168,7 @@
 						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$table_name.'.'.$j['parent_field']);
 					}
 				}
-			}
-					
+			}						
 			
 			if(isset($rule['order_by']) && isset($rule['order_field']))
 			{
@@ -205,7 +204,6 @@
 			{
 				$this->db->distinct();
 			}
-			
 			if(isset($where))
 			{
 				foreach($where as $w)
@@ -220,8 +218,7 @@
 						$this->db->where($table_name.'.'.$w['where_field'],$w['where_key']);
 					}					
 				}
-			}				
-				
+			}			
 			$query = $this->db->get($table_name)->result_array();
 			if($query)
 			{
@@ -254,16 +251,18 @@
 					}
 				}
 			}
+
 			if(isset($where))
 			{
 				foreach($where as $w)
 				{
-					if(isset($w['where_field']) && isset($w['where_table']) && isset($w['is_or_where']))
+					if(isset($w['where_field']) && isset($w['where_key']) && isset($w['is_or_where']))
 					{
 						$this->db->or_where($table_name.'.'.$w['where_field'],$w['where_key']);
 					}
-					if(isset($w['where_field']) && isset($w['where_table']) && !isset($w['is_or_where']))
+					if(isset($w['where_field']) && isset($w['where_key']) && !isset($w['is_or_where']))
 					{
+						
 						$this->db->where($table_name.'.'.$w['where_field'],$w['where_key']);
 					}					
 				}
