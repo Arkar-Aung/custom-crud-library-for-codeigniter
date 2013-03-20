@@ -14,7 +14,6 @@
 
 	class Crud_model extends CI_Model
 	{
-
 		/** 
 		 * Inserting data to a specify table in database .
 		 * 
@@ -158,7 +157,6 @@
 		
 		function get($table_name,$where = array(),$rule = array(),$join = array())
 		{
-
 			if(isset($join))
 			{		
 				foreach($join as $j)
@@ -227,7 +225,7 @@
 					}					
 				}
 			}			
-			$query = $this->db->get($table_name)->result_array();
+			$query = $this->get_result($table_name);
 			if($query)
 			{
 				return $query;
@@ -283,12 +281,38 @@
 					}					
 				}
 			}
-			$query = $this->db->get($table_name)->result_array();
+			$query = $this->get_result($table_name);
 			if($query)
 			{
 				return array_shift($query);
 			}
 			return false;
+		}
+		
+		/** 
+		 * Getting data as your provided format in config file
+		 * 
+		 * Accepts one variable
+		 * 
+		 * @param $table_name a name of table from which you want to get data .
+		 * @return data from your target table
+		 */		
+		
+		function get_result($table_name)
+		{
+			if($this->config->item('result_type'))
+			{
+				if($this->config->item('result_type') == 'array')
+				{
+					return $this->db->get($table_name)->result_array();
+				}
+				if($this->config->item('result_type') == 'object')
+				{
+					return $this->db->get($table_name)->result();	
+				}
+			}
+			return $this->db->get($table_name)->result_array();
+			
 		}
 		
 		
