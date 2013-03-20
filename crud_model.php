@@ -8,7 +8,7 @@
  * @author Arkar Aung
  * @copyright 2012 Arkar Aung
  * @license http://opensource.org/licenses/MIT MIT License
- * @version 1.0
+ * @version 1.1
  * 
 */
 
@@ -165,7 +165,15 @@
 				{
 					if(isset($j['target_field']) && isset($j['target_table']) && isset($j['parent_field']))
 					{
-						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$table_name.'.'.$j['parent_field']);
+						if(isset($j['parent_table']))
+						{
+							$parent_table = $j['parent_table'];
+						}
+						else
+						{
+							$parent_table = $table_name;
+						}
+						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$parent_table.'.'.$j['parent_field']);
 					}
 				}
 			}						
@@ -247,7 +255,15 @@
 				{
 					if(isset($j['target_field']) && isset($j['target_table']) && isset($j['parent_field']))
 					{
-						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$table_name.'.'.$j['parent_field']);
+						if(isset($j['parent_table']))
+						{
+							$parent_table = $j['parent_table'];
+						}
+						else
+						{
+							$parent_table = $table_name;
+						}						
+						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$parent_table.'.'.$j['parent_field']);
 					}
 				}
 			}
