@@ -28,6 +28,17 @@ After loading it ,
 
 -------------------------------------------------------------------------------------------------------------
 
+Add option in config
+====================
+Add it to application/config/config.php ..
+
+		$config['result_type'] = 'array';
+		
+You can set  only 'array' and 'object' to global $config varialble . This is for choosing data type as you like
+when you get the data .
+
+-------------------------------------------------------------------------------------------------------------
+
 Insert
 ======
 
