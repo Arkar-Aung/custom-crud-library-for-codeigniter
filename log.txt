@@ -1,2 +1,2 @@
 1. Fixed join two other table. Added 'parent_table' in $join field .
-2. Add option for choosing data type - 'object' and 'array' .
+2. Add option for choosing data type when getting data - 'object' and 'array' .
