@@ -1,1 +1,1 @@
-1. Fixed join two other table.
+1. Fixed join two other table. Added 'parent_table' in $join field .
