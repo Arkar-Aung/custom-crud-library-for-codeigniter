@@ -131,6 +131,29 @@ It looks like that ..
 It'll return array if your passing data is match with database . Use foreach loop to get each segment
 of return array . if not , return false .
 
+Note : you can join two target tables in join statement . Just add 'parent_table' field in $join . If you didn't
+set 'parent_table' field , we define 'parent_table' is the same with $table_name .
+			$join[0]['target_table'] = 'staff';
+			$join[0]['target_field'] = 'user_id';
+			$join[0]['parent_field'] = 'user_id';
+			$join[1]['target_table'] = 'shop';
+			$join[1]['target_field'] = 'shop_id';
+			$join[1]['parent_field'] = 'shop_id';
+			$join[1]['parent_table'] = 'staff';
+			$rule['order_by'] = 'desc';
+			$rule['order_field'] = 'user_id'
+			$where[0]['where_field'] = 'active';
+			$where[0]['where_key'] = '1';			
+			$table_name = 'user_list';
+			$this->crud->get($table_name,$where,$rule,$join);
+
+Like that ..
+
+			$this->db->join('staff','staff.user_id=user_list.user_id')
+				->join('shop','shop.shop_id=staff.shop_id')
+				->order_by('user_id','desc')
+				->get_where('user_list',array('user_list.active'=>1))
+				->result_array();
 -------------------------------------------------------------------------------------------------------------
 
 Get by Key
