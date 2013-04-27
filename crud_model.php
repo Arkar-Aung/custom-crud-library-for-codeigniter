@@ -248,7 +248,7 @@
 		 * @return data match with $rule
 		 */ 		
 		
-		function get_byKey($table_name,$where = array(),$join = array())
+		function get_byKey($table_name,$where = array(),$join = array(),$select)
 		{
 			$this->db->select($select);				
 			if(isset($join))
