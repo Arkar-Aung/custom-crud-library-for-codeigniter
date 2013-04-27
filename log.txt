@@ -1,2 +1,3 @@
 1. Fixed join two other table. Added 'parent_table' in $join field .
 2. Add option for choosing data type when getting data - 'object' and 'array' .
+3. Add select as fifth parameter for selecting specific fields - 'String'
