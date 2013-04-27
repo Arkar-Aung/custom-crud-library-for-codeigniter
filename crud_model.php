@@ -151,12 +151,14 @@
 		 * @param $table_name a name of table from which you want to get data .
 		 * @param $where an array to match with it when getting data 
 		 * @param $rule an array for order_by , limit , like  ,
-		 * @param $join an array to join with the your another selected table		 
+		 * @param $join an array to join with the your another selected table	
+		 * @param $select a string which contains field name to get				 	 
 		 * @return data match with $rule
 		 */ 		
 		
-		function get($table_name,$where = array(),$rule = array(),$join = array())
+		function get($table_name,$where = array(),$rule = array(),$join = array(),$select)
 		{
+			$this->db->select($select);
 			if(isset($join))
 			{		
 				foreach($join as $j)
@@ -242,11 +244,13 @@
 		 * @param $table_name a name of table from which you want to get data .
 		 * @param $where an array to match with it when getting data 
 		 * @param $join an array to join with the your another selected table
+		 * @param $select a string which contains field name to get				 
 		 * @return data match with $rule
 		 */ 		
 		
 		function get_byKey($table_name,$where = array(),$join = array())
-		{		
+		{
+			$this->db->select($select);				
 			if(isset($join))
 			{		
 				foreach($join as $j)
