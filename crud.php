@@ -9,10 +9,10 @@
  * @author Arkar Aung
  * @copyright 2012 Arkar Aung
  * @license http://opensource.org/licenses/MIT MIT License
- * @version 1.0
+ * @version 1.1
 */
 
-  class Crud 
+	class Crud 
 	{
 		
 		/** 
@@ -104,10 +104,11 @@
 		 * getting the data
 		 * @param $join an array which contains field and key to join with
 		 * another table
+		 * @param $select a string which contains field name to get		 
 		 * @return void
 		 */ 		
 		
-		function get($table_name,$where = array(),$rule = array(),$join = array())
+		function get($table_name,$where = array(),$rule = array(),$join = array(),$select='*')
 		{
 			return $this->ci->crud_model->get($table_name,$where,$rule,$join);
 		}
@@ -122,10 +123,11 @@
 		 * @param $where an array which contains field and key to delete
 		 * @param $join an array which contains field and key to join with
 		 * another table
+		 * @param $select a string which contains field name to get				 
 		 * @return void
 		 */ 		
 		
-		function get_byKey($table_name,$where = array() ,$join = array())
+		function get_byKey($table_name,$where = array() ,$join = array(),$select='*')
 		{
 			return $this->ci->crud_model->get_byKey($table_name,$where,$join);
 		}
@@ -144,21 +146,9 @@
 			return $this->ci->crud_model->truncate($table_name);
 		}
 		
-		/** 
-		 * To generate custom unique id . incrementing id if it exits
-		 * If not , try to create new one
-		 * 
-		 * Accepts three variable
-		 * 
-		 * @param $table_name a name of table which you want to clean up.
-		 * @param $uniq_id_field a name of unique id file from the table
-		 * @param $prefix a prefix you want to prefix to your id
-		 * @return uniqid 
-		 */ 		
-		
 		function generate_uniqid($table_name,$uniq_id_field,$prefix)
 		{
 			return $this->ci->crud_model->generate_uniqid($table_name,$uniq_id_field,$prefix);
-		}		
+		}
 	}
 ?>
