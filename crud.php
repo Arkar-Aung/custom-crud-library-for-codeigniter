@@ -110,7 +110,7 @@
 		
 		function get($table_name,$where = array(),$rule = array(),$join = array(),$select='*')
 		{
-			return $this->ci->crud_model->get($table_name,$where,$rule,$join);
+			return $this->ci->crud_model->get($table_name,$where,$rule,$join,$select);
 		}
 		
 		/** 
@@ -129,7 +129,7 @@
 		
 		function get_byKey($table_name,$where = array() ,$join = array(),$select='*')
 		{
-			return $this->ci->crud_model->get_byKey($table_name,$where,$join);
+			return $this->ci->crud_model->get_byKey($table_name,$where,$join,$select);
 		}
 
 		/** 
