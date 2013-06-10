@@ -150,5 +150,15 @@
 		{
 			return $this->ci->crud_model->generate_uniqid($table_name,$uniq_id_field,$prefix);
 		}
+
+		function bind_dropdown($data,$key,$value,$label=null)
+		{
+			return $this->ci->crud_model->bind_dropdown($data,$key,$value,$label);
+		}	
+
+		function count_all($table_name,$where)
+		{
+			return $this->ci->crud_model->count_all($table_name,$where);
+		}	
 	}
 ?>
