@@ -163,6 +163,7 @@
 			{		
 				foreach($join as $j)
 				{
+					$left = '';
 					if(isset($j['target_field']) && isset($j['target_table']) && isset($j['parent_field']))
 					{
 						if(isset($j['parent_table']))
@@ -173,7 +174,11 @@
 						{
 							$parent_table = $table_name;
 						}
-						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$parent_table.'.'.$j['parent_field']);
+						if(isset($j['join_opt']))
+						{
+							$left = $j['join_opt'];
+						}
+						$this->db->join($j['target_table'],$j['target_table'].'.'.$j['target_field'].'='.$parent_table.'.'.$j['parent_field'],$left);
 					}
 				}
 			}						
@@ -185,7 +190,10 @@
 
 			if(isset($rule['limit']))
 			{
-				$this->db->limit($rule['limit']);
+				if(!isset($rule['offset'])){
+					$rule['offset'] = 0;
+				}
+				$this->db->limit($rule['limit'],$rule['offset']);
 			}	
 			
 			if(isset($rule['like_field']) && isset($rule['like_key']))	
@@ -216,14 +224,26 @@
 			{
 				foreach($where as $w)
 				{
+					if(isset($w['where_table']))
+					{
+						$where_table = $w['where_table'];
+					}
+					else
+					{
+						$where_table = $table_name;
+					}
 					if(isset($w['where_field']) && isset($w['where_key']) && isset($w['is_or_where']))
 					{
-						$this->db->or_where($table_name.'.'.$w['where_field'],$w['where_key']);
+						$this->db->or_where($where_table.'.'.$w['where_field'],$w['where_key']);
 					}
 					if(isset($w['where_field']) && isset($w['where_key']) && !isset($w['is_or_where']))
 					{
 						
-						$this->db->where($table_name.'.'.$w['where_field'],$w['where_key']);
+						$this->db->where($where_table.'.'.$w['where_field'],$w['where_key']);
+					}
+					if(isset($w['where_in_field']) && isset($w['where_in_key']))
+					{
+						$this->db->where_in($w['where_in_field'],$w['where_in_key']);
 					}					
 				}
 			}			
@@ -274,14 +294,22 @@
 			{
 				foreach($where as $w)
 				{
+					if(isset($w['where_table']))
+					{
+						$where_table = $w['where_table'];
+					}
+					else
+					{
+						$where_table = $table_name;
+					}					
 					if(isset($w['where_field']) && isset($w['where_key']) && isset($w['is_or_where']))
 					{
-						$this->db->or_where($table_name.'.'.$w['where_field'],$w['where_key']);
+						$this->db->or_where($where_table.'.'.$w['where_field'],$w['where_key']);
 					}
 					if(isset($w['where_field']) && isset($w['where_key']) && !isset($w['is_or_where']))
 					{
 						
-						$this->db->where($table_name.'.'.$w['where_field'],$w['where_key']);
+						$this->db->where($where_table.'.'.$w['where_field'],$w['where_key']);
 					}					
 				}
 			}
@@ -318,7 +346,53 @@
 			return $this->db->get($table_name)->result_array();
 			
 		}
+
+
+		function bind_dropdown($data,$key,$value,$label)
+		{
+			$result = null;
+
+			if(is_array($data))
+			{
+				if($label)
+				{
+					$result[0] = '-- Select '.ucfirst($value).' --';
+				}					
+				foreach($data as $d)
+				{
+					$result[$d[$key]] = $d[$value];
+				}			
+			}
+			return $result;
+		}
 		
-		
+		function count_all($table_name,$where)
+		{
+			if(isset($where))
+			{
+				foreach($where as $w)
+				{
+					if(isset($w['where_table']))
+					{
+						$where_table = $w['where_table'];
+					}
+					else
+					{
+						$where_table = $table_name;
+					}					
+					if(isset($w['where_field']) && isset($w['where_key']) && isset($w['is_or_where']))
+					{
+						$this->db->or_where($where_table.'.'.$w['where_field'],$w['where_key']);
+					}
+					if(isset($w['where_field']) && isset($w['where_key']) && !isset($w['is_or_where']))
+					{
+						
+						$this->db->where($where_table.'.'.$w['where_field'],$w['where_key']);
+					}					
+				}
+			}
+
+			return $this->db->count_all_results($table_name);
+		}
 	}
 ?>
